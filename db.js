@@ -1,4 +1,5 @@
 let env = '';
+/* istanbul ignore next */
 if (process.env.NODE_ENV === 'test') {
   env = 'test';
 } else if (process.env.NODE_ENV === 'dev') {
@@ -6,9 +7,7 @@ if (process.env.NODE_ENV === 'test') {
 } else {
   env = 'production';
 }
-console.log(env);
 const config = require('./knexfile.js')[env];
-console.log(config);
 const db = require('knex')(config);
 
 module.exports = db;

@@ -1,62 +1,56 @@
 // server.js
 // where your node app starts
 
-// init project
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
+const Ajv = require('ajv');
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const bunyan = require('bunyan');
+
+const logi = bunyan.createLogger({
+  name: 'api:server',
+  stream: process.stdout,
+  level: 'info',
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// we've started you off with Express, 
+// we've started you off with Express,
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
+app.use('/coverage', express.static('coverage/lcov-report'));
 
-// init sqlite db
-// var fs = require('fs');
-// var dbFile = './.data/sqlite.db';
-// var exists = fs.existsSync(dbFile);
-// var sqlite3 = require('sqlite3').verbose();
-//var db = new sqlite3.Database(dbFile);
-// var db  = require('./db');
+app.use(require('./api/controllers/'));
 
-// if ./.data/sqlite.db does not exist, create it, otherwise print records to console
-// db.serialize(function(){
-//   if (!exists) {
-//     db.run('CREATE TABLE Dreams (dream TEXT)');
-//     console.log('New table Dreams created!');
-    
-//     // insert default dreams
-//     db.serialize(function() {
-//       db.run('INSERT INTO Dreams (dream) VALUES ("Find and count some sheep"), ("Climb a really tall mountain"), ("Wash the dishes")');
-//     });
-//   }
-//   else {
-//     console.log('Database "Dreams" ready to go!');
-//     db.each('SELECT * from Dreams', function(err, row) {
-//       if ( row ) {
-//         console.log('record:', row);
-//       }
-//     });
-//   }
-// });
+// Setup swagger-ui endpoint
+const swaggerUi = require('swagger-ui-express');
+const yaml = require('js-yaml');
+const fs = require('fs');
 
-// http://expressjs.com/en/starter/basic-routing.html
-// app.get("/", function (request, response) {
-//   response.sendFile(__dirname + '/views/index.html');
-// });
+const showExplorer = false;
+const swaggerOptions = { validatorUrl: null };
+const swaggerSpec = yaml.safeLoad(fs.readFileSync('./public/swagger.yaml'));
+app.use(
+  '/v1/swagger-ui',
+  swaggerUi.serve,
+  swaggerUi.setup(
+    swaggerSpec,
+    showExplorer,
+    swaggerOptions,
+  ),
+);
 
-// // endpoint to get all the dreams in the database
-// // currently this is the only endpoint, ie. adding dreams won't update the database
-// // read the sqlite3 module docs and try to add your own! https://www.npmjs.com/package/sqlite3
-// app.get('/getDreams', function(request, response) {
-//   db.all('SELECT * from Dreams', function(err, rows) {
-//     response.send(JSON.stringify(rows));
-//   });
-// });
+const ajv = new Ajv({
+  removeAdditional: 'all'
+});
+ajv.addSchema(swaggerSpec, 'swaggerJson');
+app.set('ajv', ajv);
+  
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+const listener = app.listen(process.env.PORT, () => {
+  logi.info(`Your app is listening on port ${listener.address().port}`);
 });

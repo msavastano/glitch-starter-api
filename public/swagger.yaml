@@ -1,0 +1,78 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: testing api sample glitch project
+basePath: /v1/
+schemes:
+  - https
+  - http
+
+# Tags
+tags:
+- name: core
+  description: Core functionality
+  
+paths:
+  /user:
+    x-swagger-router-controller: index
+    get:
+      tags:
+        - core
+      produces:
+        - application/json
+      description: takes in uuid and returns user
+      parameters:
+        - $ref: '#/parameters/UserUuid'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UserResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+                
+definitions:
+  ErrorResponse:
+    required:
+      - error
+    properties:
+      error:
+        type: string
+    
+  UserResponse:
+    required:
+      - uuid
+    properties:
+      uuid:
+        type: string
+      
+  GetUserResponse:
+    properties:
+      name:
+        type: string
+      uuid:
+        type: string
+      error:  
+        type: string
+        
+  GetUserQueryParams:
+    required:
+      - uuid
+    properties:
+      uuid:
+        type: string
+      
+parameters:
+  UserUuid:
+    in: query
+    name: uuid
+    type: string
+    required: true
+    description: user uuid
+        
