@@ -3738,7 +3738,7 @@ packages:
     resolution:
       integrity: sha1-9+572FfdfB0tOMDnTvvWgdFDH9E=
 registry: 'https://registry.npmjs.org/'
-shrinkwrapMinorVersion: 6
+shrinkwrapMinorVersion: 7
 shrinkwrapVersion: 3
 specifiers:
   ajv: ^6.5.0
