@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js | ./node_modules/.bin/bunyan",
+    "start": "PORT=3000 node server.js | ./node_modules/.bin/bunyan",
     "lint": "eslint --fix --ignore-path .gitignore .",
     "test": "NODE_ENV=test PORT=9000 ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --recursive --reporter mocha-multi --reporter-options spec=-,xunit=test-reports/unit.xml,doc=test-reports/unit.html $(find api -name '*.test.js') --timeout 15000 --exit"
   },
