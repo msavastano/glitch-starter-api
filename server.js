@@ -54,3 +54,5 @@ app.set('ajv', ajv);
 const listener = app.listen(process.env.PORT, () => {
   logi.info(`Your app is listening on port ${listener.address().port}`);
 });
+
+module.exports = listener;
