@@ -1,7 +1,7 @@
 const describe = require('mocha').describe;
 const it = require('mocha').it;
 const rewire = require('rewire');
-const assert = require('chai').assert
+const assert = require('chai').assert;
 const server = require('../../../server');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -17,7 +17,7 @@ describe('Get user from DB', () => {
         assert.equal(u.name, 'Addy');
       });
   });
-  
+
   it('it should return error', () => {
     const user = rewire('./user.js');
     const getUser = user.__get__('getUser');
@@ -31,7 +31,7 @@ describe('Get user from DB', () => {
 });
 
 describe('test api enpdts', () => {
-  it('it should return 200 status', (done) => { 
+  it('it should return 200 status', (done) => {
     chai.request(server)
       .get('/v1/user?uuid=a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11')
       .end((err, res) => {
@@ -40,8 +40,8 @@ describe('test api enpdts', () => {
         done();
       });
   });
-  
-  it('it should return 404 status', (done) => { 
+
+  it('it should return 404 status', (done) => {
     chai.request(server)
       .get('/v1/user?uuid=a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a1')
       .end((err, res) => {
@@ -50,8 +50,8 @@ describe('test api enpdts', () => {
         done();
       });
   });
-  
-  it('it should return 400 status', (done) => { 
+
+  it('it should return 400 status', (done) => {
     chai.request(server)
       .get('/v1/user?uid=a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a1')
       .end((err, res) => {

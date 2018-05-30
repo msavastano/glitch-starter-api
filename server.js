@@ -14,12 +14,7 @@ const logi = bunyan.createLogger({
   level: 'info',
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// we've started you off with Express,
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
-
-// http://expressjs.com/en/starter/static-files.html
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use('/coverage', express.static('coverage/lcov-report'));
 
@@ -31,7 +26,7 @@ const yaml = require('js-yaml');
 const fs = require('fs');
 
 const showExplorer = false;
-const swaggerOptions = { validatorUrl: null };
+const swaggerOptions = {validatorUrl: null};
 const swaggerSpec = yaml.safeLoad(fs.readFileSync('./public/swagger.yaml'));
 app.use(
   '/v1/swagger-ui',
@@ -39,16 +34,15 @@ app.use(
   swaggerUi.setup(
     swaggerSpec,
     showExplorer,
-    swaggerOptions,
-  ),
+    swaggerOptions
+  )
 );
 
 const ajv = new Ajv({
-  removeAdditional: 'all'
+  removeAdditional: 'all',
 });
 ajv.addSchema(swaggerSpec, 'swaggerJson');
 app.set('ajv', ajv);
-  
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
