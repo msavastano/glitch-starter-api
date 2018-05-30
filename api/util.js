@@ -5,7 +5,7 @@
  * @param {Object} payload Payload to be validated and sanitized
  * @param {Object} validationError The error we throw if schema is invalid
  * @param {Object} req an Express request
- * @returns {Promise<Object, Error>} A promise to return a valid schema or an error
+ * @returns {<Object, Error>} return a valid schema or an error
  */
 const validateSwaggerSchema = (ajv, schema, payload) => {
   
@@ -13,14 +13,11 @@ const validateSwaggerSchema = (ajv, schema, payload) => {
     $ref: 'swaggerJson' + schema
   });
   
-  console.log(ajvValidator(payload));
-  
   if (ajvValidator(payload)) {
-    console.log(payload);
     return payload;
   }
-  console.log(ajvValidator.errors);
-  throw ajvValidator.errors;
+  const err = new Error(ajvValidator.errors[0].message);
+  throw err;
 };
 
 module.exports = { validateSwaggerSchema };

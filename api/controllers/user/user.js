@@ -25,7 +25,6 @@ module.exports = (req, res) => {
   return Promise.resolve()
     .then(() => {
       logi.info('validating input');
-      console.log('HELLLLLLOOOOOOOO');
       return util.validateSwaggerSchema(req.app.get('ajv'), '#/definitions/GetUserQueryParams', req.query);
     })
     .then((query) => {
@@ -49,7 +48,7 @@ module.exports = (req, res) => {
     })
     .catch((err) => {
       logi.info('input validation failed');
-      logi.info(err);
-      res.status(400).send(err);
+      logi.info(err.message);
+      res.status(400).send(err.message);
     });
 };

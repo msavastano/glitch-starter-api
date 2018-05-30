@@ -35,7 +35,6 @@ describe('test api enpdts', () => {
     chai.request(server)
       .get('/v1/user?uuid=a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11')
       .end((err, res) => {
-        console.log('HELLLLLLOOOOOOOO');
         assert.equal(res.body.name, 'Addy');
         assert.equal(res.status, 200);
         done();
@@ -57,7 +56,7 @@ describe('test api enpdts', () => {
       .get('/v1/user?uid=a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a1')
       .end((err, res) => {
         assert.equal(res.status, 400);
-        assert.equal(res.body[0].message, 'should have required property \'uuid\'');
+        assert.equal(res.text, 'should have required property \'uuid\'');
         done();
       });
   });
