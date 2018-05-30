@@ -1,1 +1,19 @@
-# glitch-starter-api
+API Essentials
+------------
+- swagger.io
+  - api documentation
+- knex.js
+  - migration
+  - [build and tear down test suite](http://mherman.org/blog/2016/04/28/test-driven-development-with-node/#.WwmQEFMvymU)
+- bookshelf.js
+  - orm
+- mocha/chai
+  - test framework
+- istanbul
+  - test coverage
+- bunyan
+  - logging
+- eslint
+  - linting airbnb style
+- ajv
+  - [validation with swagger specs](https://code.tutsplus.com/tutorials/validating-data-with-json-schema-part-1--cms-25343)

@@ -1,0 +1,48 @@
+{
+  "name": "api-essentials",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js | ./node_modules/.bin/bunyan",
+    "lint": "eslint --fix --ignore-path .gitignore .",
+    "test": "NODE_ENV=test PORT=9001 ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --recursive --reporter mocha-multi --reporter-options spec=-,xunit=test-reports/unit.xml,doc=test-reports/unit.html $(find api -name '*.test.js') --timeout 15000 --exit"
+  },
+  "dependencies": {
+    "ajv": "^6.5.0",
+    "body-parser": "^1.18.3",
+    "bookshelf": "^0.13.3",
+    "bunyan": "^2.0.2",
+    "custom-error": "^0.2.1",
+    "express": "^4.16.3",
+    "js-yaml": "^3.11.0",
+    "knex": "^0.14.6",
+    "sqlite3": "^4.0.0",
+    "swagger-ui-express": "^3.0.9",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
+    "istanbul": "^1.1.0-alpha.1",
+    "mocha": "^5.2.0",
+    "mocha-multi": "^1.0.1",
+    "nock": "^9.2.6",
+    "rewire": "^4.0.1",
+    "sinon": "^5.0.7"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": ""
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
