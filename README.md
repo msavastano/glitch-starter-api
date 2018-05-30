@@ -14,6 +14,6 @@ API Essentials
 - bunyan
   - logging
 - eslint
-  - linting airbnb style
+  - [linting google style](https://github.com/google/eslint-config-google)
 - ajv
   - [validation with swagger specs](https://code.tutsplus.com/tutorials/validating-data-with-json-schema-part-1--cms-25343)
