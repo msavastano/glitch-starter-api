@@ -36,6 +36,33 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/ErrorResponse'
+    post:
+      tags:
+        - core
+      description: takes in name and adds user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UserResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
                 
 definitions:
   ErrorResponse:
