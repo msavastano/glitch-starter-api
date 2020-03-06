@@ -18,7 +18,7 @@ const createUser = (req) => {
   })
   .save(null, {method: 'insert'})
   .then((model) => {
-    logi.info(model + 'User created');
+    logi.info('User created');
   });
 };
 
