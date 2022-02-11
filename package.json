@@ -9,7 +9,7 @@
     "test": "NODE_ENV=test PORT=9001 ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --recursive --reporter mocha-multi --reporter-options spec=-,xunit=test-reports/unit.xml,doc=test-reports/unit.html $(find api -name '*.test.js') --timeout 15000 --exit"
   },
   "dependencies": {
-    "ajv": "^6.5.0",
+    "ajv": "^6.12.3",
     "body-parser": "^1.18.3",
     "bookshelf": "^0.13.3",
     "bunyan": "^2.0.2",
